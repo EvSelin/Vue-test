@@ -17,6 +17,7 @@
     },
 
     mounted() {
+      //listen browser auto fill
       let el = this.$el.querySelector('input');
       const autoFillClass = 'filled';
       const onAutoFillStart = (el) => el.parentNode.classList.add(autoFillClass);

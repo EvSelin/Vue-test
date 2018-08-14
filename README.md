@@ -1,4 +1,4 @@
-# bad_project
+# project
 
 ## Project setup
 ```
