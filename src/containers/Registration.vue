@@ -70,7 +70,12 @@
         }
     }
 
-    input.field_with_error {
-        border: 2px solid #f79483
+    .input-group {
+        display: flex;
+        flex-direction: column;
+
+        > * {
+            margin-bottom: 10px;
+        }
     }
 </style>

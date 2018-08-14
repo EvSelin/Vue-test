@@ -2,47 +2,18 @@
     <div>
         <form action=''>
             <div class='input-group'>
-                <label>
-                    <span>First Name</span>
-                    <br>
-                    <input type='text' :class="{ 'field_with_error': $v.model.userName.$error }" v-model.trim='$v.model.userName.$model'>
-                </label>
-                <br>
-                <label>
-                    Last Name
-                    <br>
-                    <input type='text' :class="{ 'field_with_error': $v.model.lastName.$error }" v-model.trim='$v.model.lastName.$model'>
-                </label>
+                <AnimatedField label='first name' type='text' :class="{ 'field_with_error': $v.model.userName.$error }" v-model.trim="$v.model.userName.$model"/>
+                <AnimatedField label='last name' type='text' :class="{ 'field_with_error': $v.model.lastName.$error }" v-model.trim="$v.model.lastName.$model"/>
             </div>
 
             <div class='input-group'>
-                <label>
-                    E-mail
-                    <br>
-                    <input type='email' v-model='model.email' :class="{ 'field_with_error': $v.model.email.$error }" v-model.trim='$v.model.email.$model'>
-                </label>
-                <br>
-                <label>
-                    Phone Number
-                    <br>
-                    <input type='tel' v-model='model.phone' :class="{ 'field_with_error': $v.model.phone.$error }" v-model.trim='$v.model.phone.$model'>
-                </label>
+                <AnimatedField label='E-mail' type='email' :class="{ 'field_with_error': $v.model.email.$error }" v-model.trim="$v.model.email.$model"/>
+                <AnimatedField label='Phone Number' type='tel' :class="{ 'field_with_error': $v.model.phone.$error }" v-model.trim="$v.model.phone.$model"/>
             </div>
-
             <div class='input-group'>
-                <label>
-                    Password
-                    <br>
-                    <input type='password' :class="{ 'field_with_error': $v.model.password.$error }" v-model.trim='$v.model.password.$model'>
-                </label>
-                <br>
-                <label>
-                    Repeat password
-                    <br>
-                    <input type='password' :class="{ 'field_with_error': $v.model.repeatPassword.$error }" v-model.trim='$v.model.repeatPassword.$model'>
-                </label>
+                <AnimatedField label='Password' type='password' :class="{ 'field_with_error': $v.model.password.$error }" v-model.trim="$v.model.password.$model"/>
+                <AnimatedField label='Repeat password' type='password' :class="{ 'field_with_error': $v.model.repeatPassword.$error }" v-model.trim="$v.model.repeatPassword.$model"/>
             </div>
-            <br>
             <button @click.prevent='submit()'>Submit</button>
         </form>
     </div>
@@ -50,12 +21,15 @@
 
 <script>
   import { required, minLength, sameAs, email, numeric } from 'vuelidate/lib/validators'
+  import AnimatedField from '../AnimatedField';
 
   export default {
     name: 'Person',
+    components: { AnimatedField },
 
     data() {
       return {
+        test: '',
         submitStatus: null,
         model: {
           userName: '',
