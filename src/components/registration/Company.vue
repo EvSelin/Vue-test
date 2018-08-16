@@ -94,6 +94,15 @@
 
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+
+        > * {
+            margin-bottom: 10px;
+        }
+    }
 
 </style>

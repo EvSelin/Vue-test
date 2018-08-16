@@ -4,7 +4,6 @@ import router from './router/routes'
 import store from './store/store'
 import Vuelidate from 'vuelidate'
 
-// Vue.use(Vuex);
 Vue.use(Vuelidate);
 Vue.config.productionTip = false;
 

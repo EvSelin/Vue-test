@@ -7,8 +7,10 @@
         </div>
 
         <nav>
-            <router-link tag='a' to='/registration'>Sing Up</router-link>
-            <router-link tag='a' to='/authorization'>Sugn In</router-link>
+            <!--<router-link tag='a' to='/registration'>Sing Up</router-link>-->
+            <!--<router-link tag='a' to='/authorization'>Sign In</router-link>-->
+            <button>Sing Up</button>
+
             <router-link v-if='loggedIn' tag='a' to='/logout'>Logout</router-link>
         </nav>
     </div>

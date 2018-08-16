@@ -1,23 +1,17 @@
 <template>
     <div>
-        <label>
-            Person
-        <input type='radio' v-bind:value='true' v-model='triggerTab'>
-        </label>
-        <label>
-            Company
-            <input type='radio' v-bind:value='false' v-model='triggerTab'>
-        </label>
-        <br>
-        <div class='tabs-container'>
-            <transition name='component-fade'>
-                <person v-show='triggerTab'></person>
-            </transition>
+        <button v-for='tab in tabs'
+                v-bind:key='tab'
+                v-bind:class="['tab-button', { active: currentTab === tab }]"
+                v-on:click='currentTab = tab'>
+            {{ tab }}
+        </button>
 
-            <transition name='component-fade'>
-                <company v-show='!triggerTab'></company>
-            </transition>
-        </div>
+        <br>
+
+        <transition name='component-fade' mode='out-in'>
+            <component v-bind:is='currentTabComponent' class='tab'></component>
+        </transition>
     </div>
 </template>
 
@@ -25,7 +19,6 @@
   import { mapActions } from 'vuex'
   import person from  '../components/registration/Person'
   import company from  '../components/registration/Company'
-
 
   export default {
     name: 'Registration',
@@ -36,7 +29,8 @@
 
     data () {
       return {
-        triggerTab: true,
+        currentTab: 'Person',
+        tabs: [ 'Person', 'Company' ]
       }
     },
 
@@ -46,11 +40,18 @@
       sendData(data) {
         this.registration(data)
       },
+    },
+
+    computed: {
+      currentTabComponent() {
+        return this.currentTab.toLowerCase()
+      }
     }
+
   }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 
     .component-fade-enter-active,
     .component-fade-leave-active {
@@ -62,20 +63,35 @@
         opacity: 0
     }
 
-    .tabs-container {
+    button {
         position: relative;
+        background: transparent;
+        box-shadow: none;
+        border: 0;
+        outline: none;
+        padding-left: 20px;
+        margin-bottom: 10px;
 
-        > div {
-            position: absolute
+        &:before {
+            content: '';
+            left: 0;
+            position: absolute;
+            height: 13px;
+            width: 13px;
+            border-radius: 50%;
+            border: 1px solid #000;
         }
-    }
 
-    .input-group {
-        display: flex;
-        flex-direction: column;
-
-        > * {
-            margin-bottom: 10px;
+        &.active:after {
+            content: '';
+            left: 4px;
+            top: 50%;
+            position: absolute;
+            height: 7px;
+            width: 7px;
+            border-radius: 50%;
+            background-color: #0498ef;
+            transform: translateY(-50%);
         }
     }
 </style>
