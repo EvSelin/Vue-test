@@ -1,10 +1,10 @@
 <template>
-
+    <div>Terms</div>
 </template>
 
 <script>
   export default {
-    name: 'Ts&Cs'
+    name: 'TsCs'
   }
 </script>
 

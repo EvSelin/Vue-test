@@ -2,21 +2,21 @@
     <div class='nav-bar'>
         <div class='logo'>
             <router-link tag='a' to='/'>
-                Logotype
+                Logo
             </router-link>
         </div>
 
         <nav>
-            <!--<router-link tag='a' to='/registration'>Sing Up</router-link>-->
-            <!--<router-link tag='a' to='/authorization'>Sign In</router-link>-->
-            <button>Sing Up</button>
-
+            <span v-if='!loggedIn' >Sing In</span>
+            <span v-if='!loggedIn' @click='triggerModal(true)'>Sing Up</span>
             <router-link v-if='loggedIn' tag='a' to='/logout'>Logout</router-link>
         </nav>
     </div>
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
     name: 'Navigation',
 
@@ -24,6 +24,12 @@
       loggedIn () {
         return this.$store.getters.loggedIn;
       }
+    },
+
+    methods: {
+      ...mapActions([
+        'triggerModal'
+      ]),
     }
   }
 
@@ -45,7 +51,8 @@
         }
     }
 
-    nav a {
+    nav a,
+    nav span {
         text-decoration: none;
         font-size: 18px;
         margin: 0 15px;

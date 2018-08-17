@@ -1,12 +1,14 @@
 <template>
   <div>
-    <button @click="$store.commit('triggerModal')">Show Modal</button>
-
-    <modal v-show='this.$store.getters.showModal'>
-      <div slot='body'>
-        <registration></registration>
-      </div>
+    <modal v-show='modalState' triggerModal>
+      <div slot='body'><registration/></div>
     </modal>
+
+    <!--<modal v-show='modalState' triggerModal>-->
+      <!--<div slot='body'>-->
+        <!--<authorization/>-->
+      <!--</div>-->
+    <!--</modal>-->
 
     <navigation/>
     <router-view></router-view>
@@ -14,7 +16,7 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex'
+  import { mapActions } from 'vuex'
   import Registration  from './containers/Registration'
   import Navigation    from './components/Navigation'
   import Modal         from './components/ModalWindow'
@@ -32,6 +34,7 @@
   export default {
     name: 'app',
     components: {
+      Authorization,
       Registration,
       Navigation,
       Modal
@@ -39,7 +42,6 @@
 
     data() {
       return {
-        // showModal: false
       }
     },
 
@@ -47,8 +49,16 @@
       this.fetchRoutes()
     },
 
+    computed: {
+      modalState() {
+        return this.$store.state.modalVisible
+      }
+    },
+
     methods: {
-      ...mapMutations(['triggerModal']),
+      ...mapActions([
+        'triggerModal'
+      ]),
 
       fetchRoutes(){
         setTimeout(function () {

@@ -6,13 +6,20 @@
             </div>
 
             <div class='input-group'>
-                <AnimatedField label='e-mail' type='email' :class="{ 'field_with_error': $v.model.email.$error }" v-model.trim="$v.model.email.$model"/>
-                <AnimatedField label='phone Number' type='tel' :class="{ 'field_with_error': $v.model.phone.$error }" v-model.trim="$v.model.phone.$model"/>
+                <AnimatedField label='e-mail' type='email' :class="{ 'field_with_error': $v.model.email.$error }" v-model.trim='$v.model.email.$model'/>
+                <AnimatedField label='phone Number' type='tel' :class="{ 'field_with_error': $v.model.phone.$error }" v-model.trim='$v.model.phone.$model'/>
             </div>
             <div class='input-group'>
-                <AnimatedField label='password' type='password' :class="{ 'field_with_error': $v.model.password.$error }" v-model.trim="$v.model.password.$model"/>
-                <AnimatedField label='repeat password' type='password' :class="{ 'field_with_error': $v.model.repeatPassword.$error }" v-model.trim="$v.model.repeatPassword.$model"/>
+                <AnimatedField label='password' type='password' :class="{ 'field_with_error': $v.model.password.$error }" v-model.trim='$v.model.password.$model'/>
+                <AnimatedField label='repeat password' type='password' :class="{ 'field_with_error': $v.model.repeatPassword.$error }" v-model.trim='$v.model.repeatPassword.$model'/>
             </div>
+            <br>
+            <label :class="{ 'field_with_error': $v.terms.$error }">
+                <input type='checkbox' v-model.trim='$v.terms.$model'>
+                <router-link tag='a' to='/terms'>Terms and Conditions</router-link>
+            </label>
+            <br>
+            <br>
             <button @click.prevent='submit()'>Submit</button>
         </form>
     </div>
@@ -29,6 +36,7 @@
     data() {
       return {
         submitStatus: null,
+        terms: false,
         model: {
           companyTitle: '',
           email: '',
@@ -87,7 +95,11 @@
 
         repeatPassword: {
           sameAsPassword: sameAs('password')
-        }
+        },
+      },
+
+      terms: {
+        sameAs: sameAs( () => true)
       }
     }
   }
@@ -99,10 +111,15 @@
     .input-group {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
 
         > * {
             margin-bottom: 10px;
         }
+    }
+
+    label.field_with_error a {
+        color: #f79483;
     }
 
 </style>

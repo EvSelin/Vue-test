@@ -14,7 +14,7 @@
 
                     <div class='modal-action'>
                         <slot name='footer'>
-                            <button class='modal-default-button' @click="$emit('close')">
+                            <button class='modal-default-button' @click='triggerModal(false)'>
                                 Close
                             </button>
                         </slot>
@@ -26,15 +26,31 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
     name: 'ModalWindow',
 
     data() {
       return {
-        showModal: false
       }
+    },
+
+    mounted: function () {
+      document.addEventListener('keydown', (e) => {
+        if (this.$store.state.modalVisible && e.keyCode === 27) {
+          this.triggerModal(false)
+        }
+      });
+    },
+
+    methods: {
+      ...mapActions([
+        'triggerModal'
+      ]),
     }
   }
+
 </script>
 
 <style lang='scss' scoped>

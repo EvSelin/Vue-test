@@ -1,17 +1,9 @@
 <template>
     <div>
         <form action="">
-            <label>
-                E-mail
-                <br>
-                <input type='email' :class="{ 'field_with_error': $v.model.email.$error }" v-model.trim='$v.model.email.$model'>
-            </label>
+            <AnimatedField label='E-mail' type='email' :class="{ 'field_with_error': $v.model.email.$error }" v-model.trim="$v.model.email.$model"/>
             <br>
-            <label>
-                Password
-                <br>
-                <input type='password' :class="{ 'field_with_error': $v.model.password.$error }" v-model.trim='$v.model.password.$model'>
-            </label>
+            <AnimatedField label='password' type='password' :class="{ 'field_with_error': $v.model.password.$error }" v-model.trim="$v.model.password.$model"/>
             <br>
             <button @click.prevent='submit()'>Submit</button>
         </form>
@@ -21,9 +13,11 @@
 <script>
   import { mapActions } from 'vuex'
   import { required, minLength, email,  } from 'vuelidate/lib/validators'
+  import AnimatedField from '../components/AnimatedField';
 
   export default {
     name: 'authorization',
+    components: { AnimatedField },
 
     data() {
       return {

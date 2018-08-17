@@ -1,7 +1,7 @@
 <template>
     <label :class='{ filled: value }'>
         <span>{{ label }}</span>
-        <input :type='type' v-model='value' @input='updateValue($event.target.value)' />
+        <input :type='type' v-model='value' v-on='listeners'/>
     </label>
 </template>
 
@@ -12,7 +12,7 @@
 
     data() {
       return {
-        value: ''
+        value: '',
       }
     },
 
@@ -40,14 +40,27 @@
     },
 
     computed: {
-      valuePresents() {
-        return this.value !== '';
+      listeners() {
+        return {
+          ...this.$listeners,
+          input: event =>
+            this.$emit('input', event.target.value),
+
+          focus: event =>
+            event.target.closest('label').classList.add('filled'),
+
+          blur: event => {
+            if (event.target.value === '') {
+              event.target.closest('label').classList.remove('filled')
+            }
+          }
+        }
       }
     },
 
     methods: {
-      updateValue(value) {
-        this.$emit('input', value);
+      print() {
+        this.$el.classList.add('filled')
       }
     },
   }
