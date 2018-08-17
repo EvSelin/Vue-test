@@ -14,7 +14,7 @@ const actions = {
     console.log(args);
 
     return new Promise((resolve, reject) => {
-      axios.post('/register', {
+      axios.post('httpbin.org/anything', {
           model: args
         })
         .then( response => {

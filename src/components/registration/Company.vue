@@ -19,6 +19,8 @@
                 <router-link tag='a' to='/terms'>Terms and Conditions</router-link>
             </label>
             <br>
+
+            <DropZone ref='Dropzone' :class="{ 'field_with_error': $v.model.files.$error }" v-model='model.files'></DropZone>
             <br>
             <button @click.prevent='submit()'>Submit</button>
         </form>
@@ -28,10 +30,11 @@
 <script>
   import { required, minLength, sameAs, email, numeric } from 'vuelidate/lib/validators'
   import AnimatedField from '../AnimatedField';
+  import DropZone from  '../DropZone'
 
   export default {
     name: 'Company',
-    components: { AnimatedField },
+    components: { AnimatedField, DropZone },
 
     data() {
       return {
@@ -43,6 +46,7 @@
           phone: '',
           password: '',
           repeatPassword: '',
+          files: '',
         }
       }
     },
@@ -96,6 +100,10 @@
         repeatPassword: {
           sameAsPassword: sameAs('password')
         },
+
+        files: {
+          required,
+        }
       },
 
       terms: {
