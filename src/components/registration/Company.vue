@@ -19,6 +19,7 @@
                 <router-link tag='a' to='/terms'>Terms and Conditions</router-link>
             </label>
             <br>
+            <br>
 
             <DropZone ref='Dropzone' :class="{ 'field_with_error': $v.model.files.$error }" v-model='model.files'></DropZone>
             <br>
