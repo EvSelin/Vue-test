@@ -14,9 +14,7 @@
 
                     <div class='modal-action'>
                         <slot name='footer'>
-                            <button class='modal-default-button' @click='triggerModal(false)'>
-                                Close
-                            </button>
+                            <v-btn color='red' @click='triggerModal(false)'>Close</v-btn>
                         </slot>
                     </div>
                 </div>
@@ -83,7 +81,6 @@
     }
 
     .modal-body {
-        margin: 20px 0;
     }
 
     .modal-enter,

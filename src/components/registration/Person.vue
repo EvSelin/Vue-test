@@ -20,7 +20,7 @@
             </label>
             <br>
             <br>
-            <button @click.prevent='submit()'>Submit</button>
+            <v-btn color='blue'  @click.prevent='submit()'>Submit</v-btn>
         </form>
     </div>
 </template>

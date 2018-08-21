@@ -20,10 +20,9 @@
             </label>
             <br>
             <br>
-
             <DropZone ref='Dropzone' :class="{ 'field_with_error': $v.model.files.$error }" v-model='model.files'></DropZone>
             <br>
-            <button @click.prevent='submit()'>Submit</button>
+            <v-btn color='blue' @click.prevent='submit()'>Submit</v-btn>
         </form>
     </div>
 </template>

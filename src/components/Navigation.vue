@@ -1,17 +1,13 @@
 <template>
-    <div class='nav-bar'>
-        <div class='logo'>
-            <router-link tag='a' to='/'>
-                Logo
-            </router-link>
-        </div>
-
-        <nav>
-            <span v-if='!loggedIn' >Sing In</span>
-            <span v-if='!loggedIn' @click='triggerModal(true)'>Sing Up</span>
-            <router-link v-if='loggedIn' tag='a' to='/logout'>Logout</router-link>
-        </nav>
-    </div>
+    <v-toolbar-items class='hidden-sm-and-down'>
+        <router-link tag='button' class="v-btn v-btn--flat" to='/properties'>Properties</router-link>
+        <router-link tag='button' class="v-btn v-btn--flat" to='/how_it_works'>How it works</router-link>
+        <router-link tag='button' class="v-btn v-btn--flat" to='/about'>About Us</router-link>
+        <router-link tag='button' class="v-btn v-btn--flat" to='/blog'>Blog</router-link>
+        <v-btn flat v-if='!loggedIn'>Sing In</v-btn>
+        <!--<v-btn flat v-if='!loggedIn' @click='triggerModal(true)'>Sing Up</v-btn>-->
+        <v-btn flat v-if='loggedIn'>Logout</v-btn>
+    </v-toolbar-items>
 </template>
 
 <script>
@@ -51,16 +47,8 @@
         }
     }
 
-    nav a,
-    nav span {
-        text-decoration: none;
-        font-size: 18px;
-        margin: 0 15px;
-        color: #000;
-        font-weight: bold;
-
-        &.is-active {
-            color: red;
-        }
+    .is-active {
+        color: red;
     }
+
 </style>

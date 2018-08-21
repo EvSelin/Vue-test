@@ -1,43 +1,38 @@
 <template>
   <div>
-    <modal v-show='modalState' triggerModal>
-      <div slot='body'><registration/></div>
-    </modal>
-
-    <!--<modal v-show='modalState' triggerModal>-->
-      <!--<div slot='body'>-->
-        <!--<authorization/>-->
-      <!--</div>-->
-    <!--</modal>-->
-
-    <navigation/>
-    <router-view></router-view>
+    <Header></Header>
+    <main>
+      <router-view/>
+    </main>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
+  import '../src/assets/style/aplication.scss'
   import { mapActions } from 'vuex'
-  import Registration  from './containers/Registration'
-  import Navigation    from './components/Navigation'
-  import Modal         from './components/ModalWindow'
-  import Home          from './containers/Home'
-  import Authorization from './containers/Authorization'
-  import About         from './containers/About'
-  import Blog          from './containers/Blog'
-  import HowItWorks    from './containers/HowItWorks'
-  import Properties    from './containers/Properties'
-  import FAQ           from './containers/FAQ'
-  import TsCs          from './containers/TsCs'
-  import router        from './router/routes'
-  import NotFound      from './containers/NotFound'
+  import Header         from './components/shared/Header'
+  import Footer         from './components/shared/Footer'
+  import Registration   from './containers/Registration'
+  import Home           from './containers/Home'
+  import Authorization  from './containers/Authorization'
+  import About          from './containers/About'
+  import Blog           from './containers/Blog'
+  import HowItWorks     from './containers/HowItWorks'
+  import Properties     from './containers/Properties'
+  import PropertiesItem from './containers/PropertieItem'
+  import FAQ            from './containers/FAQ'
+  import TsCs           from './containers/TsCs'
+  import router         from './router/routes'
+  import NotFound       from './containers/NotFound'
 
   export default {
     name: 'app',
     components: {
+      Header,
+      Footer,
       Authorization,
       Registration,
-      Navigation,
-      Modal
     },
 
     data() {
@@ -49,30 +44,25 @@
       this.fetchRoutes()
     },
 
-    computed: {
-      modalState() {
-        return this.$store.state.modalVisible
-      }
-    },
-
     methods: {
       ...mapActions([
         'triggerModal'
       ]),
 
-      fetchRoutes(){
+      fetchRoutes() {
         setTimeout(function () {
           router.addRoutes([
-            { path: '/',              component: Home },
-            { path: '/registration',  component: Registration },
-            { path: '/authorization', component: Authorization },
-            { path: '/about',         component: About },
-            { path: '/blog',          component: Blog },
-            { path: '/how_it_works',  component: HowItWorks },
-            { path: '/properties',    component: Properties },
-            { path: '/FAQ',           component: FAQ },
-            { path: '/terms',         component: TsCs },
-            { path: '/NotFound',      component: NotFound },
+            { path: '/',                component: Home },
+            { path: '/registration',    component: Registration },
+            { path: '/authorization',   component: Authorization },
+            { path: '/about',           component: About },
+            { path: '/blog',            component: Blog },
+            { path: '/how_it_works',    component: HowItWorks },
+            { path: '/properties',      component: Properties },
+            { path: '/properties_item', component: PropertiesItem },
+            { path: '/FAQ',             component: FAQ },
+            { path: '/terms',           component: TsCs },
+            { path: '/NotFound',        component: NotFound },
           ])
         }, 500);
       }
