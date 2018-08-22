@@ -1,19 +1,20 @@
-const state = {
-};
-
-const mutation = {
-};
-
-const actions = {
-
-};
-
-const getters = {
-};
-
 export default {
-  state,
-  mutation,
-  actions,
-  getters
+
+  state: {
+    visibility: false
+  },
+
+  mutations: {
+    showModal(state, value) {
+      state.visibility = value;
+    }
+  },
+
+  actions: {
+    triggerModal(context, value) {
+      context.commit('showModal', value);
+    }
+  },
+
+  getters: {}
 }

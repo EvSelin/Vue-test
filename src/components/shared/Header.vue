@@ -16,9 +16,14 @@
                 <Navigation></Navigation>
             </v-toolbar>
 
-            <Modal v-show='modalState' triggerModal>
+            <Modal v-show='modalState'>
                 <div slot='body'><registration/></div>
             </Modal>
+
+            <!--<Modal v-show='modalState'>-->
+                <!--<div slot='body'><authorization/></div>-->
+            <!--</Modal>-->
+            
         </header>
 
         <div v-if='!loggedIn'>
@@ -33,14 +38,16 @@
   import Modal          from '../ModalWindow'
   import Navigation     from '../Navigation'
   import Registration   from '../../containers/Registration'
-  import { mapActions } from 'vuex'
+  import Authorization   from '../../containers/Authorization'
+  import { mapActions, mapState, mapGetters } from 'vuex'
 
   export default {
     name: 'Header',
     components: {
       Navigation,
       Modal,
-      Registration
+      Registration,
+      Authorization
     },
 
     data() {
@@ -50,13 +57,13 @@
     },
 
     computed: {
-      modalState() {
-        return this.$store.state.modalVisible
-      },
+      ...mapState({
+        modalState: state => state.modals.visibility
+      }),
 
-      loggedIn () {
-        return this.$store.getters.loggedIn;
-      }
+      ...mapGetters([
+        'loggedIn'
+      ]),
     },
 
     methods: {

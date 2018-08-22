@@ -6,6 +6,7 @@
 </template>
 
 <script>
+
   import Houses from '../components/properties/Houses'
 
   export default {
@@ -19,6 +20,7 @@
       }
     },
   }
+
 </script>
 
 <style scoped>

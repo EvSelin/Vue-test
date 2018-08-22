@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapState } from 'vuex'
 
   export default {
     name: 'ModalWindow',
@@ -36,10 +36,16 @@
 
     mounted: function () {
       document.addEventListener('keydown', (e) => {
-        if (this.$store.state.modalVisible && e.keyCode === 27) {
+        if (this.modalState && e.keyCode === 27) {
           this.triggerModal(false)
         }
       });
+    },
+
+    computed: {
+      ...mapState({
+        modalState: state => state.modals.visibility
+      }),
     },
 
     methods: {
