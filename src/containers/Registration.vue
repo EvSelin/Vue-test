@@ -10,7 +10,9 @@
         <br>
 
         <transition name='component-fade' mode='out-in'>
-            <component v-bind:is='currentTabComponent' class='tab'></component>
+            <keep-alive>
+                <component v-bind:is='currentTabComponent'></component>
+            </keep-alive>
         </transition>
     </div>
 </template>
@@ -35,10 +37,14 @@
     },
 
     methods: {
-      ...mapActions(['registration']),
+      ...mapActions([
+        'registration',
+        'closeModal'
+      ]),
 
       sendData(data) {
-        this.registration(data)
+        this.registration(data);
+        this.closeModal();
       },
     },
 

@@ -5,7 +5,7 @@
             <br>
             <AnimatedField label='password' type='password' :class="{ 'field_with_error': $v.model.password.$error }" v-model.trim="$v.model.password.$model"/>
             <br>
-            <button @click.prevent='submit()'>Submit</button>
+            <v-btn color='blue' @click.prevent='submit()'>Submit</v-btn>
         </form>
     </div>
 </template>
@@ -30,7 +30,10 @@
     },
 
     methods: {
-      ...mapActions(['authorization']),
+      ...mapActions([
+        'authorization',
+        'closeModal'
+      ]),
 
       submit() {
         this.$v.$touch();
@@ -44,7 +47,8 @@
           this.submitStatus = 'PENDING';
 
           setTimeout(() => {
-            this.submitStatus = 'OK'
+            this.submitStatus = 'OK';
+            this.closeModal();
           }, 500)
         }
       }

@@ -1,18 +1,28 @@
 export default {
 
   state: {
-    visibility: false
+    visibility: false,
+    isComponent: ''
   },
 
   mutations: {
-    showModal(state, value) {
-      state.visibility = value;
+    show(state, component) {
+      state.visibility = true;
+      state.isComponent = component;
+    },
+
+    close(state) {
+      state.visibility = false;
     }
   },
 
   actions: {
-    triggerModal(context, value) {
-      context.commit('showModal', value);
+    showModal(context, component) {
+      context.commit('show', component);
+    },
+
+    closeModal(context) {
+      context.commit('close')
     }
   },
 

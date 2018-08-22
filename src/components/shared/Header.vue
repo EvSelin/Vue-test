@@ -16,20 +16,13 @@
                 <Navigation></Navigation>
             </v-toolbar>
 
-            <Modal v-show='modalState'>
-                <div slot='body'><registration/></div>
-            </Modal>
-
-            <!--<Modal v-show='modalState'>-->
-                <!--<div slot='body'><authorization/></div>-->
-            <!--</Modal>-->
-            
+            <Modal v-show='modalState' :component='currentComponent'/>
         </header>
 
         <div v-if='!loggedIn'>
             <h1>Need to diversity your savings</h1>
             <p>At vero eos et accusamus et iusto odio dignissimos</p>
-            <v-btn color='blue' @click='triggerModal(true)'>Get Started</v-btn>
+            <v-btn color='blue' @click='showModal("Registration")'>Get Started</v-btn>
         </div>
     </section>
 </template>
@@ -52,13 +45,14 @@
 
     data() {
       return {
-        user: 'User'
+        user: 'User',
       }
     },
 
     computed: {
       ...mapState({
-        modalState: state => state.modals.visibility
+        modalState: state => state.modals.visibility,
+        currentComponent: state => state.modals.comp
       }),
 
       ...mapGetters([
@@ -68,7 +62,7 @@
 
     methods: {
       ...mapActions([
-        'triggerModal'
+        'showModal'
       ]),
     }
   }
@@ -94,6 +88,6 @@
         display: flex;
         align-items: center;
         margin-top: 65px;
-        height: 50vh;
+        height: 30vh;
     }
 </style>

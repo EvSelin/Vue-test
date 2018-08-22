@@ -9,12 +9,14 @@
                     </div>
 
                     <div class='modal-body'>
-                        <slot name='body'/>
+                        <keep-alive>
+                        <component v-bind:is='component'></component>
+                        </keep-alive>
                     </div>
 
                     <div class='modal-action'>
                         <slot name='footer'>
-                            <v-btn color='red' @click='triggerModal(false)'>Close</v-btn>
+                            <v-btn color='red' @click='closeModal'>Close</v-btn>
                         </slot>
                     </div>
                 </div>
@@ -25,32 +27,32 @@
 
 <script>
   import { mapActions, mapState } from 'vuex'
+  import Registration   from '../containers/Registration'
+  import Authorization   from '../containers/Authorization'
 
   export default {
     name: 'ModalWindow',
-
-    data() {
-      return {
-      }
-    },
+    components: { Registration, Authorization },
 
     mounted: function () {
       document.addEventListener('keydown', (e) => {
         if (this.modalState && e.keyCode === 27) {
-          this.triggerModal(false)
+          this.closeModal()
         }
       });
     },
 
     computed: {
       ...mapState({
-        modalState: state => state.modals.visibility
+        modalState: state => state.modals.visibility,
+        component: state => state.modals.isComponent
       }),
     },
 
     methods: {
       ...mapActions([
-        'triggerModal'
+        'triggerModal',
+        'closeModal'
       ]),
     }
   }
