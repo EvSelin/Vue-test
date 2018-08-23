@@ -1,7 +1,7 @@
 <template>
     <v-layout>
         <v-flex xs6>
-
+            <img :src='src' alt="">
         </v-flex>
         <v-flex xs6>
             <h2>{{ missionData.title }}</h2>
@@ -13,11 +13,13 @@
 </template>
 
 <script>
+  import axios from  'axios'
   export default {
     name: 'OurMission',
 
     data() {
       return {
+        src: '',
         missionData: {
           title: 'Our Mission',
           subTitle: 'Sub title',
@@ -25,6 +27,16 @@
           link: '/mission_test'
         },
       }
+    },
+
+    created() {
+      axios('https://jsonplaceholder.typicode.com/photos/1')
+        .then(response => {
+          this.src = response.data.url
+        })
+        .catch(error => {
+          console.error(error)
+        })
     }
   }
 </script>

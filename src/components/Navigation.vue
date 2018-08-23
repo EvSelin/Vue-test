@@ -5,7 +5,6 @@
         <router-link tag='button' class="v-btn v-btn--flat" to='/about'>About Us</router-link>
         <router-link tag='button' class="v-btn v-btn--flat" to='/blog'>Blog</router-link>
         <v-btn flat v-if='!loggedIn' @click='showModal("Authorization")'>Sing In</v-btn>
-        <!--<v-btn flat v-if='!loggedIn' @click='triggerModal(true)'>Sing Up</v-btn>-->
         <v-btn flat v-if='loggedIn'>Logout</v-btn>
     </v-toolbar-items>
 </template>

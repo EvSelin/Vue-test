@@ -10,7 +10,7 @@
 
                     <div class='modal-body'>
                         <keep-alive>
-                        <component v-bind:is='component'></component>
+                            <component v-bind:is='component'></component>
                         </keep-alive>
                     </div>
 

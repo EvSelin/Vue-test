@@ -1,58 +1,51 @@
 import axios from 'axios'
 
-const state = {
-  token: sessionStorage.getItem('access_token') || null,
-};
+export default {
 
-const mutation = {
-
-};
-
-const actions = {
-
-  registration({ commit }, { ...args }) {
-    console.log(args);
-
-    return new Promise((resolve, reject) => {
-      axios.post('httpbin.org/anything', {
-          model: args
-        })
-        .then( response => {
-          resolve(response)
-        })
-        .catch( error => {
-          reject(error)
-      })
-    })
+  state: {
+    token: sessionStorage.getItem('access_token') || null,
   },
 
-  authorization({ commit }, { ...args }) {
-    console.log(args);
+  mutations: {},
 
-    return new Promise((resolve, reject) => {
-      axios.get('/author', {
-        model: args
+  actions: {
+
+    registration({commit}, {...args}) {
+      console.log(args);
+
+      return new Promise((resolve, reject) => {
+        axios.post('httpbin.org/anything', {
+          model: args
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
       })
-        .then( response => {
-          resolve(response)
+    },
+
+    authorization({commit}, {...args}) {
+      console.log(args);
+
+      return new Promise((resolve, reject) => {
+        axios.get('/author', {
+          model: args
         })
-        .catch( error => {
-          reject(error)
-        })
-    })
-  }
-};
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    }
+  },
 
-const getters = {
-
-  loggedIn() {
-    return state.token !== null
-  }
-};
-
-export default {
-  state,
-  mutation,
-  actions,
-  getters
+  getters: {
+    loggedIn(state) {
+      return state.token !== null
+    }
+  },
 }
